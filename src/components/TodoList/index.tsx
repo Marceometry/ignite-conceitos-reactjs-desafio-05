@@ -1,25 +1,28 @@
 import clipboardImg from '../../assets/clipboard.png'
 import { TodoItem } from './TodoItem'
 import styles from './styles.module.css'
+import { useTodoContext } from '../../contexts'
 
 export const TodoList = () => {
-  const list = ['', '', '']
+  const { todoList, finishedTodoCount } = useTodoContext()
 
   return (
     <div className={styles.todoList}>
       <header>
         <div>
           <strong>Tarefas criadas</strong>
-          <span>0</span>
+          <span>{todoList.length}</span>
         </div>
 
         <div>
           <strong className={styles.finished}>Concluídas</strong>
-          <span>0 {!!list.length && `de ${list.length}`}</span>
+          <span>
+            {finishedTodoCount} {!!todoList.length && `de ${todoList.length}`}
+          </span>
         </div>
       </header>
 
-      {!list.length ? (
+      {!todoList.length ? (
         <div className={styles.emptyList}>
           <img src={clipboardImg} alt='Ícone de tarefa' />
           <div>
@@ -29,7 +32,7 @@ export const TodoList = () => {
         </div>
       ) : (
         <ul>
-          {list.map((item) => (
+          {todoList.map((item) => (
             <TodoItem {...item} />
           ))}
         </ul>

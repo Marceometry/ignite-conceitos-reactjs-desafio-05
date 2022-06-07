@@ -1,11 +1,18 @@
 import styles from './app.module.css'
-import { Header, Main } from './components'
+import { Form, Header, TodoList } from './components'
+import { TodoContextProvider } from './contexts'
 
 export const App = () => {
   return (
-    <div className={styles.app}>
-      <Header />
-      <Main />
-    </div>
+    <TodoContextProvider>
+      <div className={styles.app}>
+        <Header />
+
+        <main className={styles.main}>
+          <Form />
+          <TodoList />
+        </main>
+      </div>
+    </TodoContextProvider>
   )
 }
